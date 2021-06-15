@@ -8,7 +8,28 @@ wicafe
 This utility automatically logs you in at public free Wi-Fi AP's captive portals.
 
 
+Environment
+-----------
+
+ - Python 3.7+
+
+
+How to install & run
+----------
+
+It's not published on PyPI yet.
+
+```
+$ pip install -r requirements.txt
+```
+
+```
+$ python3 main.py
+```
+
+
 Supported public Wi-Fi services
 -------------------------------
 
  - Wi2
+
