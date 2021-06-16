@@ -17,23 +17,56 @@ endpoint = 'http://neverssl.com/'
 # Wi2 (Wire and Wireless)
 wi2 = re.compile('https://service\.wi2\.ne\.jp/wi2auth/.+')
 
+first = True
+internet_available = False  # be able to communicate with the endpoint
+
 
 def main():
-    while True:
-        loop()
-
-
-def loop():
     """The main loop."""
 
-    res = watch_connection()
+    global first
+
+    while True:
+        watch()
+        first = False
+        time.sleep(10)
+
+
+def watch():
+    global first, internet_available
+
+    try:
+        res = knock()
+    except (req.ConnectionError, req.Timeout):
+        if first or internet_available:
+            print('The internet is not available at present')
+            print('Hint: A default route may not be reachable if the OS detected a captive portal.')
+            print('      Please close the login window opened by the OS, if any.')
+        return
+
+    if res.status_code == ok:
+        if not internet_available:
+            print('The internet is available')
+            internet_available = True
+    else:
+        retry = knock()
+        if retry.status_code != ok:
+            print('Detected a redirection')
+            login(res)
+
+
+def login(res: req.Response):
+    """Log you in."""
+
+    global internet_available
     location = res.headers.get('Location')
 
     # Detect captive portals
+
     # Wi2
     m = wi2.match(location)
     if m is not None and res.status_code == redirect:
-        print('Logging in to Wi2 captive portal')
+        print('Wi2: Logging in')
         sess = req.Session()
 
         res = sess.get(location)
@@ -51,35 +84,16 @@ def loop():
 
         print('Wi2: Successfully logged in')
 
+    res = knock()
+    if res.status_code == ok:
+        print('The internet is available')
+        internet_available = True
+
     # TODO: add other services!
 
 
-def watch_connection() -> req.Response:
-    """Watch internet connection and return a response if it detected a failure."""
-
-    reachable = False
-
-    while True:
-        try:
-            res = req.get(endpoint, allow_redirects=False, timeout=5)
-        except req.Timeout:
-            print(f'Timed out: GET {endpoint}')
-            reachable = False
-            time.sleep(10)
-            continue
-
-        if res.status_code == ok:
-            if not reachable:
-                print('The internet is live')
-            reachable = True
-            pass
-        else:
-            retry = req.get(endpoint, allow_redirects=False, timeout=5)
-            if retry.status_code != ok:
-                print('Detected disconnection')
-                return res
-
-        time.sleep(10)
+def knock():
+    return req.get(endpoint, allow_redirects=False, timeout=5)
 
 
 if __name__ == '__main__':
