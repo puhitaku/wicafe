@@ -37,7 +37,7 @@ def watch():
 
     try:
         res = knock()
-    except (req.ConnectionError, req.Timeout):
+    except:
         if first or internet_available:
             print('The internet is not available at present')
             print('Hint: A default route may not be reachable if the OS detected a captive portal.')
