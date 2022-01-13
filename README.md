@@ -32,4 +32,6 @@ Supported public Wi-Fi services
 -------------------------------
 
  - Wi2
+   - Excelsior Caffe
+   - Saint Marc Cafe
 
