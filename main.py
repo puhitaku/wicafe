@@ -46,13 +46,13 @@ def watch():
             print('      Please close the login window opened by the OS, if any.')
         return
 
-    if res.status_code == ok:
+    if res is not None and res.status_code == ok:
         if not internet_available:
             print('The internet is available')
             internet_available = True
     else:
         retry = knock()
-        if retry.status_code != ok:
+        if retry is not None and retry.status_code != ok:
             print('Detected a redirection')
             login(res)
 
@@ -71,15 +71,25 @@ def login(res: req.Response):
         print('Wi2: Logging in')
         sess = req.Session()
 
-        res = sess.get(location)
+        try:
+            res = sess.get(location)
+        except:
+            print('Wi2: Failed to GET the forwarded location')
+            return
+
         if res.status_code != ok:
             print('Wi2: Failed to jump to the captive portal')
             return
 
-        res = sess.post(
-            'https://service.wi2.ne.jp/wi2auth/xhr/login',
-            json={'login_method': 'onetap', 'login_params': {'agree': '1'}},
-        )
+        try:
+            res = sess.post(
+                'https://service.wi2.ne.jp/wi2auth/xhr/login',
+                json={'login_method': 'onetap', 'login_params': {'agree': '1'}},
+            )
+        except:
+            print('Wi2: Failed to POST the login form')
+            return
+
         if res.status_code != ok:
             print('Wi2: Failed to POST an XHR')
             return
@@ -87,7 +97,7 @@ def login(res: req.Response):
         print('Wi2: Successfully logged in')
 
     res = knock()
-    if res.status_code == ok:
+    if res is not None and res.status_code == ok:
         print('The internet is available')
         internet_available = True
 
@@ -95,7 +105,10 @@ def login(res: req.Response):
 
 
 def knock():
-    return req.get(endpoint, allow_redirects=False, timeout=5)
+    try:
+        return req.get(endpoint, allow_redirects=False, timeout=5)
+    except:
+        return None
 
 
 if __name__ == '__main__':
