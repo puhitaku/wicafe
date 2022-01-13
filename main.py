@@ -17,7 +17,7 @@ endpoint = 'http://neverssl.com/'
 # Rules to match Cafe Wi-Fi captive portals
 
 # Wi2 (Wire and Wireless)
-wi2 = re.compile('https://service\.wi2\.ne\.jp/wi2auth/.+')
+wi2 = re.compile('https://service\.wi2\.ne\.jp/.+')
 
 first = True
 internet_available = False  # be able to communicate with the endpoint
