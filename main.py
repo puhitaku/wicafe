@@ -111,7 +111,10 @@ def wi2_shinkansen(sess: req.Session):
     try:
         res = sess.post(
             'https://service.wi2.ne.jp/wi2auth/shin_xhr/login',
-            json={"login_method": "lgovpre", "login_params": {"email": "a@example.com", "lang": "ja"}},
+            json={
+                "login_method": "lgovpre",
+                "login_params": {"email": "a@example.com", "lang": "ja"},
+            },
         )
     except:
         print('Wi2 (Shinkansen): Failed to POST the login form')
