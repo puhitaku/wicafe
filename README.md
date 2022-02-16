@@ -3,10 +3,6 @@ wicafe
 
 *Automatic login utility of free Wi-Fi captive portals*
 
-**Disclaimer: read and grant the Terms of Service of Wi-Fi services before using it!**
-
-This utility automatically logs you in at public free Wi-Fi AP's captive portals.
-
 
 Environment
 -----------
@@ -34,4 +30,13 @@ Supported public Wi-Fi services
  - Wi2
    - Excelsior Caffe
    - Saint Marc Cafe
+   - San'yo Shinkansen (West Japan Railway)
+   - Tokai Shinkansen (Central Japan Railway)
+
+
+Disclaimer
+----------
+
+ - Read and grant the Terms of Service of Wi-Fi services before using it!
+ - As stated in the license, I'm not liable for any claim and violation of the ToS :wink:
 
