@@ -3,7 +3,7 @@ name: Release Package
 on:
   push:
     tags:
-      - 'v*'
+      - 'test-v*'
 
 jobs:
   release:
@@ -46,8 +46,9 @@ jobs:
           pip install setuptools wheel twine
       - name: Build and publish
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+          TWINE_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASSWORD }}
         run: |
           python setup.py sdist bdist_wheel
           twine upload dist/*
