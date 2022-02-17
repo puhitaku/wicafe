@@ -1,0 +1,29 @@
+name: Style Checker for Python
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  python-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install '.[dev]'
+      - name: Run black
+        run: |
+          black --check --diff .
+      - name: Run mypy
+        if: ${{ always() }}
+        run: |
+          mypy -p wicafe
+      - name: Run flake8
+        if: ${{ always() }}
+        run: |
+          flake8 --diff .
+      - name: Run isort
+        run: |
+          isort --check-only --diff .
