@@ -18,6 +18,7 @@ It's not published on PyPI yet.
 ```shellsession
 $ pip install . # if you want to develop, run `$ pip install '.[dev]'`
 $ wicafe
+$ python -m wicafe  # alternative way to launch it
 ```
 
 
