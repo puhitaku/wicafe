@@ -15,7 +15,7 @@ jobs:
           pip install '.[dev]'
       - name: Run black
         run: |
-          black --check --diff .
+          black --check --diff -S -l 100 .
       - name: Run mypy
         if: ${{ always() }}
         run: |
