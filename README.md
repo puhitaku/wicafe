@@ -15,12 +15,9 @@ How to install & run
 
 It's not published on PyPI yet.
 
-```
-$ pip install -r requirements.txt
-```
-
-```
-$ python3 main.py
+```shellsession
+$ pip install . # if you want to develop, run `$ pip install '.[dev]'`
+$ wicafe
 ```
 
 
