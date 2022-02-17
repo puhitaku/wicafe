@@ -1,42 +1,30 @@
-wicafe
-======
+<!-- markdownlint-disable MD014 -->
+# wicafe
 
-*Automatic login utility of free Wi-Fi captive portals*
+Automatic login utility of free Wi-Fi captive portals
 
+## Environment
 
-Environment
------------
+- Python 3.7+
 
- - Python 3.7+
-
-
-How to install & run
-----------
+## How to install & run
 
 It's not published on PyPI yet.
 
-```
-$ pip install -r requirements.txt
-```
-
-```
-$ python3 main.py
+```shellsession
+$ pip install . # if you want to develop, run `$ pip install '.[dev]'`
+$ wicafe
 ```
 
+## Supported public Wi-Fi services
 
-Supported public Wi-Fi services
--------------------------------
+- Wi2
+  - Excelsior Caffe
+  - Saint Marc Cafe
+  - San'yo Shinkansen (West Japan Railway)
+  - Tokai Shinkansen (Central Japan Railway)
 
- - Wi2
-   - Excelsior Caffe
-   - Saint Marc Cafe
-   - San'yo Shinkansen (West Japan Railway)
-   - Tokai Shinkansen (Central Japan Railway)
+## Disclaimer
 
-
-Disclaimer
-----------
-
- - Read and grant the Terms of Service of Wi-Fi services before using it!
- - As stated in the license, I'm not liable for any claim and violation of the ToS :wink:
-
+- Read and grant the Terms of Service of Wi-Fi services before using it!
+- As stated in the license, I'm not liable for any claim and violation of the ToS :wink:
