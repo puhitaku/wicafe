@@ -58,6 +58,9 @@ def login(res: req.Response):
 
     global internet_available
     location = res.headers.get('Location')
+    if location is None:
+        print('Wi2: the response lacks Location header, aborting')
+        return
 
     # Detect captive portals
 
