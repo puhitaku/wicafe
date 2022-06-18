@@ -12,6 +12,7 @@ Supported public Wi-Fi services
    - Saint Marc Cafe
    - San'yo Shinkansen (West Japan Railway)
    - Tokai Shinkansen (Central Japan Railway)
+   - Odakyu Line (Odakyu Electric Railway)
 
 
 Prerequisites
